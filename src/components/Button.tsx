@@ -13,7 +13,7 @@ export const Button: FC<ButtonProps> = ({
       onClick={onClick}
       className={clsx(
         className,
-        "text-darker inline-flex items-center justify-center gap-1 px-6 py-2 font-semibold",
+        "text-darker inline-flex items-center justify-center gap-1 px-3 py-1.5 font-semibold sm:px-6 sm:py-2 text-sm sm:text-base",
         "bg-light hover:bg-orange-500",
         "shadow-btn active:shadow-none",
         "border-dark border-b-2 border-r-2 border-solid active:border-orange-500",

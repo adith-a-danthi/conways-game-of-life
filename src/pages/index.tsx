@@ -1,5 +1,9 @@
 import Head from "next/head";
-import Home from "@/components/Home";
+import dynamic from "next/dynamic";
+
+const DynmaicHome = dynamic(() => import("@/components/Home").then((mod) => mod.default), {
+  ssr: false,
+});
 
 export default function HomePage() {
   return (
@@ -8,7 +12,7 @@ export default function HomePage() {
         <title>Conway&apos;s Game of Life</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Home />
+      <DynmaicHome />
     </>
   );
 }
