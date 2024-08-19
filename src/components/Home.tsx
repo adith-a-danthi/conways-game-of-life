@@ -1,12 +1,20 @@
+import {
+  ArrowPathIcon,
+  PauseIcon,
+  PlayIcon,
+  ForwardIcon,
+  XMarkIcon,
+} from "@heroicons/react/24/solid";
 import clsx from "clsx";
 import { useGame } from "@/use-game";
+import { Button } from "@/components/Button";
 
 export default function Home() {
   const { grid, gameActive, toggleCell, nextGrid, clearGrid, startGame, stopGame, randomGrid } =
     useGame();
 
   return (
-    <main className="flex h-screen flex-col items-center justify-between gap-6 overflow-y-auto p-4 md:gap-10 md:p-8">
+    <main className="bg-darker text-light flex h-screen flex-col items-center justify-between gap-6 overflow-y-auto p-4 md:gap-10 md:p-8">
       <h1 className="text-center text-3xl font-bold md:text-4xl">Conway&apos;s Game of Life</h1>
 
       {/* Grid */}
@@ -17,7 +25,7 @@ export default function Home() {
               key={`${x}-${y}`}
               className={clsx(
                 "inline-block size-[15px] md:size-5",
-                item ? "bg-orange-500" : "bg-gray-200",
+                item ? "bg-orange-500" : "bg-light",
               )}
               onClick={() => !gameActive && toggleCell(x, y)}
             ></button>
@@ -27,24 +35,26 @@ export default function Home() {
 
       {/* Controls */}
       <div className="grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-10">
-        <button className="border-2 border-black px-3 py-2" onClick={randomGrid}>
-          Random
-        </button>
+        <Button onClick={randomGrid}>
+          <ArrowPathIcon className="size-5 shrink-0 sm:size-6" /> Random
+        </Button>
 
-        <button
-          className="border-2 border-black px-3 py-2"
-          onClick={() => (gameActive ? stopGame() : startGame())}
-        >
+        <Button onClick={() => (gameActive ? stopGame() : startGame())}>
+          {gameActive ? (
+            <PauseIcon className="size-5 shrink-0 sm:size-6" />
+          ) : (
+            <PlayIcon className="size-5 shrink-0 sm:size-6" />
+          )}
           {gameActive ? "Pause" : "Play"}
-        </button>
+        </Button>
 
-        <button className="border-2 border-black px-3 py-2" onClick={nextGrid}>
-          Next
-        </button>
+        <Button onClick={nextGrid}>
+          <ForwardIcon className="size-5 shrink-0 sm:size-6" /> Next
+        </Button>
 
-        <button className="border-2 border-black px-3 py-2" onClick={clearGrid}>
-          Clear
-        </button>
+        <Button onClick={clearGrid}>
+          <XMarkIcon className="size-5 shrink-0 sm:size-6" /> Clear
+        </Button>
       </div>
     </main>
   );
